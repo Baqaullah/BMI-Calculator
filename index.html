@@ -1,92 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BMI Calculator</title>
     <style>
-        body{
-            background-color: rgb(83, 83, 82);
-            color: white;
+      body {
+        background-color: rgb(83, 83, 82);
+        color: white;
+      }
+      #main {
+        margin-left: 200px;
+        margin-top: 50px;
+      }
+      #height {
+        height: 30px;
+        margin: 10px;
+        border-radius: 10px;
+      }
+      #weight {
+        height: 30px;
+        margin: 10px;
+        border-radius: 10px;
+      }
+
+      #btn {
+        height: 40px;
+        width: 100px;
+        margin: 10px;
+        border-radius: 10px;
+        margin-left: 140px;
+      }
+      #btn:hover {
+        background-color: indianred;
+        font-weight: 700;
+      }
+      #text {
+        margin-left: 200px;
+        margin-top: 50px;
+      }
+      @media (max-width: 600px) {
+        .main {
+          padding: 15px;
+          max-width: 100%;
         }
-        #main{
-            margin-left: 200px;
-            margin-top: 50px;
+
+        h1 {
+          font-size: 24px;
         }
-        #height{
-            height: 30px;
-            margin: 10px;
-            border-radius: 10px;
+
+        #btn {
+          
+          margin-left: 50px;
         }
-        #weight{
-            height: 30px;
-            margin: 10px;
-            border-radius: 10px;
+
+        #result {
+          font-size: 16px;
         }
-        
-        #btn{
-            height: 40px;
-            width: 100px;
-            margin: 10px;
-            border-radius: 10px;
-            margin-left: 140px;
-        }
-        #btn:hover{
-            background-color: indianred;
-            font-weight: 700;
-        }
-        #text{
-            margin-left: 200px;
-            margin-top: 50px;
-        }
-        
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <form>
-    <div id="main">
-    <h1>BMI Calculator</h1>
-   <label> Height in cm:</label> <input type="text" id="height"><br>
-    <label> Weight in kg:</label> <input type="text" id="weight"><br>
-    <button id="btn">Calculate</button>
-    <div id="result"></div>
-    </div>
-    <div id="text">
+      <div id="main">
+        <h1>BMI Calculator</h1>
+        <label> Height in cm:</label> <input type="text" id="height" /><br />
+        <label> Weight in kg:</label> <input type="text" id="weight" /><br />
+        <button id="btn">Calculate</button>
+        <div id="result"></div>
+      </div>
+      <div id="text">
         <h2>BMI Weight guide</h2>
-        <p>Under weight = less than 18.6 <br>Normal range = 18.6 and 24.9 <br>Overweight = Greater than 24.9</p>
-        
-    </div>
-</form>
+        <p>
+          Under weight = less than 18.6 <br />Normal range = 18.6 and 24.9
+          <br />Overweight = Greater than 24.9
+        </p>
+      </div>
+    </form>
 
-<script>
-const form = document.querySelector("form");
-form.addEventListener("submit", function(e){
-    e.preventDefault();
-    const height = parseInt(document.querySelector("#height").value);
-    const weight = parseInt(document.querySelector("#weight").value);
-    const result = document.querySelector("#result");
-    
-    if (height ==="" || height < 0 || isNaN(height)){
-        result.innerHTML = "Please enter a valid height";
-    } else if (weight === "" || weight < 0 || isNaN(weight)){
-        result.innerHTML = "Please enter a valid weight"
-    } else {
-        const bmi = (weight / ((height * height) / 10000)).toFixed(2);
-        let category = "";
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const height = parseInt(document.querySelector("#height").value);
+        const weight = parseInt(document.querySelector("#weight").value);
+        const result = document.querySelector("#result");
 
-        if (bmi <18.5){
+        if (height === "" || height < 0 || isNaN(height)) {
+          result.innerHTML = "Please enter a valid height";
+        } else if (weight === "" || weight < 0 || isNaN(weight)) {
+          result.innerHTML = "Please enter a valid weight";
+        } else {
+          const bmi = (weight / ((height * height) / 10000)).toFixed(2);
+          let category = "";
+
+          if (bmi < 18.5) {
             category = "underweight";
-        } else if (bmi >= 18.5 && bmi <= 24.9){
-            category = "nrmal weight"
-        } else if(bmi>=25 && bmi<=29.9){
+          } else if (bmi >= 18.5 && bmi <= 24.9) {
+            category = "nrmal weight";
+          } else if (bmi >= 25 && bmi <= 29.9) {
             category = "overweight";
-        } else{
-            category = "obese"
+          } else {
+            category = "obese";
+          }
+          result.innerHTML = `BMI: ${bmi} (${category})`;
         }
-        result.innerHTML = `BMI: ${bmi} (${category})`;
-    }
-})
-
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>
